@@ -3,28 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://wojteklu.com/post/writing_interpreter/</loc>
+    <loc>https://wojteklu.github.io/post/writing_interpreter/</loc>
     <lastmod>2019-04-01T15:58:23+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wojteklu.com/categories/</loc>
+    <loc>https://wojteklu.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wojteklu.com/post/</loc>
+    <loc>https://wojteklu.github.io/post/</loc>
     <lastmod>2019-04-01T15:58:23+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wojteklu.com/tags/</loc>
+    <loc>https://wojteklu.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wojteklu.com/</loc>
+    <loc>https://wojteklu.github.io/</loc>
     <lastmod>2019-04-01T15:58:23+01:00</lastmod>
     <priority>0</priority>
   </url>
