@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="wojteklu">
+<meta name="description" content="wojteklu">
+<meta name="generator" content="Hugo 0.54.0" />
+<title>Writing a Logo Interpreter</title>
+<link rel="shortcut icon" href="https://wojteklu.github.io/images/favicon.ico">
+<link rel="stylesheet" href="https://wojteklu.github.io/css/style.css">
+
+
+
+<link rel="stylesheet" href="https://wojteklu.github.io/css/monosocialiconsfont.css">
+<link rel="stylesheet" href="https://wojteklu.github.io/css/helveticaNeueLTCom.css">
+
+
+<link href="https://wojteklu.github.io/index.xml" rel="alternate" type="application/rss+xml" title="wojteklu" />
+
+
+<link rel="stylesheet" href="https://wojteklu.github.io/css/code/atom-one-dark.css">
+
+<meta property="og:title" content="Writing a Logo Interpreter" />
+<meta property="og:description" content="Creating vector graphics in Logo was the first time I wrote code. However, I wasn&rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
+🎒 Logo is a simple programming language devised by Seymour Papert for educational purposes. A user can control the movement of a turtle which draws lines on the screen." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wojteklu.github.io/post/writing-a-logo-interpreter/" />
+<meta property="article:published_time" content="2019-04-01T15:58:23&#43;01:00"/>
+<meta property="article:modified_time" content="2019-04-01T15:58:23&#43;01:00"/>
+
+
+<meta itemprop="name" content="Writing a Logo Interpreter">
+<meta itemprop="description" content="Creating vector graphics in Logo was the first time I wrote code. However, I wasn&rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
+🎒 Logo is a simple programming language devised by Seymour Papert for educational purposes. A user can control the movement of a turtle which draws lines on the screen.">
+
+
+<meta itemprop="datePublished" content="2019-04-01T15:58:23&#43;01:00" />
+<meta itemprop="dateModified" content="2019-04-01T15:58:23&#43;01:00" />
+<meta itemprop="wordCount" content="735">
+
+
+
+<meta itemprop="keywords" content="" />
+
+
+    </head>
+<body>
+    <section id="wrapper">
+        <div class="profile">
+    <section id="wrapper">
+        <header id="header">
+            <a href='https://wojteklu.github.io/'>
+            <div class="monopreview-style preview-mono2" id="letters-mono2" style="font-family: HelveticaNeueLTCom; font-size: 72px; letter-spacing: 2px; color: rgb(255, 255, 255);"><span id="mono2-i1" class="i1" style="top: 0px; left: 0px;">w</span><span id="mono2-i3" class="i3" style="top: 0px; left: 0px;">l</span></div>
+            </a>
+        </header>
+    </section>
+</div>
+
+        
+<article class="post">
+    <header>
+        <h1>Writing a Logo Interpreter</h1>
+        <h2 class="headline">Apr 2019</h2>
+    </header>
+    <section id="post-body">
+        <p>Creating vector graphics in <a href="/images/logo_berkeley.png">Logo</a> was the first time I wrote code. However, I wasn&rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.</p>
+
+<div class="emoji_title">🎒</div>
+
+<p>Logo is a simple programming language devised by <a href="https://en.wikipedia.org/wiki/Seymour_Papert">Seymour Papert</a>
+ for educational purposes. A user can control the movement of a turtle which draws lines on the screen. There are four basic commands in Logo language:
+<div class="empty10"></div></p>
+
+<ul>
+<li><code>fd(100)</code> moves the turtle 100 steps forward</li>
+<li><code>bk(100)</code> move the turtle backwards by 100 steps</li>
+<li><code>rt(90)</code> turns the turtle 90° to the right</li>
+<li><code>lt(90)</code> turns the turtle 90° to the left</li>
+</ul>
+
+<p>When we want to draw a square with sides of length 200, we can do this with the following code:</p>
+
+<pre><code class="swift">fd(200) rt(90) fd(200) rt(90) fd(200) rt(90) fd(200) rt(90)</code></pre>
+
+<p>We see that the two commands <code>fd(100)</code>  <code>rt(90)</code> are repeated four times. We can achieve the same thing using:</p>
+
+<pre><code class="swift">repeat 4 [fd(100) rt(90)]</code></pre>
+
+<p>By default, the turtle has a pen attached and whenever it moves, a line is drawn. We can switch turtle to walking mode in which turtle moves without drawing by using <code>penup</code> command. To switch back to drawing mode, we can use <code>pendown</code> command. Here&rsquo;s a code which draws two parallel lines.</p>
+
+<pre><code class="swift">fd(100) pu lf(90) pd lt(90) bk(100)</code></pre>
+
+<p>The icing on the cake are procedures which provide a way to encapsulate a collection of commands. Once a procedure has been created, it can be used just the way a built-in command is used. We can draw two squares with the following code:</p>
+
+<pre><code class="swift">to square :length
+  repeat 4 [forward(:length) right(90)]
+end
+    
+square(100)
+</code></pre>
+
+<p>To execute some piece of code based on the evaluation of one or more conditions, we can use if-else statement.</p>
+
+<pre><code class="swift">if (:size < 5) [
+  fd(:size)
+] else [
+  fd(5)
+]
+</code></pre>
+
+<p>And that&rsquo;s our Logo language reference. Now let&rsquo;s focus on an interpreter.</p>
+
+<div class="emoji_title">🤖</div>
+
+<p>An interpreter is a program that reads a code and turns it into something else. Our interpreter takes Logo code and creates vector graphics. Here is one of my favorite examples. This is the code:</p>
+
+<pre><code class="swift">to tree :size
+  if (:size < 5) [
+    fd(:size) bk(:size)
+  ] else [
+    fd(:size/3)  
+    lt(30) tree(:size*2/3) rt(30)
+    fd(:size/6)
+    rt(25) tree(:size/2) lt(25)
+    fd(:size/3)
+    rt(25) tree(:size/2) lt(25)
+    fd(:size/6)
+    bk(:size)
+  ]
+end
+
+tree(350)
+</code></pre>
+
+<p>And what comes out of intepreter looks like this:</p>
+
+<p><img src="/images/tree.jpg" alt="tree"/></p>
+
+<p>Isn&rsquo;t it amazing? Let&rsquo;s outline the very basics of how it works. First, it transforms source code to tokens. It is called lexical analysis and it&rsquo;s done by lexer. A token is a small unit of language. It might be a number, a variable or even a paren. Here&rsquo;s an example.</p>
+
+<pre><code class="json">{
+  input: "repeat 4 [fd(100) rt(90)]"
+  output:[
+    { type: "repeat", value: "repeat" }, 
+    { type: "number", value: "4" },
+    { type: "lBracket", value: "[" },
+    { type: "identifier", value: "fd" }
+    { type: "lParen", value: "(" }, 
+    { type: "number", value: "100" },
+    { type: "rParen", value: ")" },
+    { type: "identifier", value: "rt" }
+    { type: "lParen", value: "(" }, 
+    { type: "number", value: "90" },
+    { type: "rParen", value: ")" },
+    { type: "rBracket", value: "]" },
+    { type: "eof", value: "" }]
+}</code></pre>
+
+<p>Next step is parsing. It goes through tokens and builds a tree data structure called <code>Abstract Syntax Tree</code>, which represents the source code. Besides building up the data structure, it analyzes the input and checks that it conforms to expected structure.</p>
+
+<pre><code class="json">{
+  output: [{
+    type: "repeatExpression",
+    count: "4",
+    statements: [
+        { 
+            type: "callExpression", 
+            name: "fd",
+            arguments: [{ type: "number", value: "200" }]
+        },
+        { 
+            type: "callExpression", 
+            name: "rt",
+            arguments: [{ type: "number", value: "90" }]
+        }
+    ]
+  }]
+}</code></pre>
+
+<p>The last part is the evaluation. This is where the code is evaluated into meaningful output. The interpreter traverses each node in <code>AST</code> and transforms them the to drawing commands. Finally, those commands are used to turn the turtle and draw lines. Here&rsquo;s the example. What comes out of evaluator is the image:</p>
+
+<p><img src="/images/square.jpg" alt="tree"/></p>
+
+<p>Implementing an interpreter is not a piece of cake. The code is challenging and complex. I encourage you to check out <a href="https://github.com/wojteklu/logo">interpreter</a> I wrote. The interpreter&rsquo;s code is divided into three major parts: <code>lexer</code>, <code>parser</code> and <code>evaluator</code>.</p>
+
+<div class="emoji_title">💻</div>
+
+<p>To make the interpreter accessible, I created a <a href="https://github.com/wojteklu/logo/releases/tag/v0.1.0">source code editor</a> for macOS. The idea is super simple – you write code on the left-hand side of the screen and you get the image on the right.</p>
+
+<p><a href="/images/logo_ide.png"><img src="/images/logo_ide.png" alt="tree" style="max-width:90%"/></a></p>
+
+<p>I’m absolutely fascinated with Logo interpreter. It&rsquo;s just so much fun to play with. Writing the code and seeing the result as an image is an experience on its own.</p>
+
+    </section>
+</article>
+
+        <footer id="footer">
+    
+        <div id="social">
+	
+    
+    <a class="symbol" href="mailto:contact@wojteklu.com">
+        email
+    </a>
+    
+    <a class="symbol" href="http://www.github.com/wojteklu">
+        githubalt
+    </a>
+    
+    <a class="symbol" href="http://www.twitter.com/wojteklu">
+        twitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">© Copyright 2019 wojteklu</p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://wojteklu.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-92815283-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+</html>

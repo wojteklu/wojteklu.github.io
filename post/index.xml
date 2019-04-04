@@ -13,11 +13,11 @@
     
     <item>
       <title>Writing a Logo Interpreter</title>
-      <link>https://wojteklu.github.io/post/writing_interpreter/</link>
+      <link>https://wojteklu.github.io/post/writing-a-logo-interpreter/</link>
       <pubDate>Mon, 01 Apr 2019 15:58:23 +0100</pubDate>
       
-      <guid>https://wojteklu.github.io/post/writing_interpreter/</guid>
-      <description>Logo was the first time I wrote code. However, I wasn&amp;rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
+      <guid>https://wojteklu.github.io/post/writing-a-logo-interpreter/</guid>
+      <description>Creating vector graphics in Logo was the first time I wrote code. However, I wasn&amp;rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
 🎒 Logo is a simple programming language devised by Seymour Papert for educational purposes. A user can control the movement of a turtle which draws lines on the screen.</description>
     </item>
     
