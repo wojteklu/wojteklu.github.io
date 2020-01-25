@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://wojteklu.github.io/css/code/atom-one-dark.css">
 
 <meta property="og:title" content="Writing a Logo Interpreter" />
-<meta property="og:description" content="Creating vector graphics in Logo was the first time I wrote code. However, I wasn&rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
+<meta property="og:description" content="Creating vector graphics in Logo was the first time I wrote code. I wasn&rsquo;t even aware I was coding. For me, it was plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
 🎒 Logo is a simple programming language devised by Seymour Papert for educational purposes. A user can control the movement of a turtle which draws lines on the screen." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wojteklu.github.io/post/writing-a-logo-interpreter/" />
@@ -32,13 +32,13 @@
 
 
 <meta itemprop="name" content="Writing a Logo Interpreter">
-<meta itemprop="description" content="Creating vector graphics in Logo was the first time I wrote code. However, I wasn&rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
+<meta itemprop="description" content="Creating vector graphics in Logo was the first time I wrote code. I wasn&rsquo;t even aware I was coding. For me, it was plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.
 🎒 Logo is a simple programming language devised by Seymour Papert for educational purposes. A user can control the movement of a turtle which draws lines on the screen.">
 
 
 <meta itemprop="datePublished" content="2019-04-01T15:58:23&#43;01:00" />
 <meta itemprop="dateModified" content="2019-04-01T15:58:23&#43;01:00" />
-<meta itemprop="wordCount" content="735">
+<meta itemprop="wordCount" content="728">
 
 
 
@@ -62,10 +62,10 @@
 <article class="post">
     <header>
         <h1>Writing a Logo Interpreter</h1>
-        <h2 class="headline">Apr 2019</h2>
+        <h2 class="headline">2019</h2>
     </header>
     <section id="post-body">
-        <p>Creating vector graphics in <a href="/images/logo_berkeley.png">Logo</a> was the first time I wrote code. However, I wasn&rsquo;t even aware I was coding. For me, it was just plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.</p>
+        <p>Creating vector graphics in <a href="/images/logo_berkeley.png">Logo</a> was the first time I wrote code. I wasn&rsquo;t even aware I was coding. For me, it was plain fun with a little of math. And now, twenty years later I decided to write an interpreter of Logo programming language.</p>
 
 <div class="emoji_title">🎒</div>
 
@@ -92,7 +92,7 @@
 
 <pre><code class="swift">fd(100) pu lf(90) pd lt(90) bk(100)</code></pre>
 
-<p>The icing on the cake are procedures which provide a way to encapsulate a collection of commands. Once a procedure has been created, it can be used just the way a built-in command is used. We can draw two squares with the following code:</p>
+<p>The icing on the cake are procedures which provide a way to encapsulate a collection of commands. Once a procedure has been created, it can be used the way a built-in command is used. We can draw two squares with the following code:</p>
 
 <pre><code class="swift">to square :length
   repeat 4 [forward(:length) right(90)]
@@ -179,7 +179,7 @@ tree(350)
   }]
 }</code></pre>
 
-<p>The last part is the evaluation. This is where the code is evaluated into meaningful output. The interpreter traverses each node in <code>AST</code> and transforms them the to drawing commands. Finally, those commands are used to turn the turtle and draw lines. Here&rsquo;s the example. What comes out of evaluator is the image:</p>
+<p>The last part is the evaluation. This is where the code is evaluated into meaningful output. The interpreter traverses each node in <code>AST</code> and transforms them the to drawing commands. Finally, those commands are used to turn the turtle and draw lines. What comes out of evaluator is the image:</p>
 
 <p><img src="/images/square.jpg" alt="tree"/></p>
 
@@ -191,7 +191,7 @@ tree(350)
 
 <p><a href="/images/logo_ide.png"><img src="/images/logo_ide.png" alt="tree" style="max-width:90%"/></a></p>
 
-<p>I’m absolutely fascinated with Logo interpreter. It&rsquo;s just so much fun to play with. Writing the code and seeing the result as an image is an experience on its own.</p>
+<p>I’m absolutely fascinated with Logo interpreter. It&rsquo;s so much fun to play with. Writing the code and seeing the result as an image is an experience on its own.</p>
 
     </section>
 </article>
@@ -216,7 +216,7 @@ tree(350)
 </div>
 
     
-    <p class="small">© Copyright 2019 wojteklu</p>
+    <p class="small">© Copyright 2020 wojteklu</p>
 </footer>
 
     </section>
@@ -224,19 +224,6 @@ tree(350)
 <script src="https://wojteklu.github.io/js/highlight.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-92815283-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
 
 
 </body>
