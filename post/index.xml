@@ -6,19 +6,10 @@
     <description>Recent content in Posts on wojteklu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jan 2020 15:58:23 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 01 Apr 2019 15:58:23 +0100</lastBuildDate>
     
 	<atom:link href="https://wojteklu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Image Aesthetics Assessment</title>
-      <link>https://wojteklu.github.io/post/image-aesthetics-assessment/</link>
-      <pubDate>Wed, 01 Jan 2020 15:58:23 +0100</pubDate>
-      
-      <guid>https://wojteklu.github.io/post/image-aesthetics-assessment/</guid>
-      <description>Machine learning is awesome. It provides a powerful set of techniques to make data-driven decisions for tasks that require humans input. One of such tasks is image aesthetics. For most people it is easy to tell which images are more beautiful than others. However, it&amp;rsquo;s hard to tell what specific rules the images follow. It&amp;rsquo;s a subjective concept, perfect for supervised machine learning. In this article I’m going to explain what neural network is and how we use it to solve the mentioned problem.</description>
-    </item>
     
     <item>
       <title>Writing a Logo Interpreter</title>
